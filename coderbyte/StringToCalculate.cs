@@ -11,13 +11,16 @@ namespace coderbyte
     {
 
         //Allowed Operator *,/,+,-,**
-        private static char[] operators = { '*', '/', '+', '-','^'};
+        private static char[] operators = { '^', '*', '/', '+', '-'};
 
         public static double smallExecuteOperation(char op, double op1, double op2)
         {
             double output = 0;
             switch (op)
             {
+                case '^':
+                    output = Math.Pow(op1, op2);
+                    break;
                 case '*':
                     output = op1 * op2;
                     break;
@@ -29,9 +32,6 @@ namespace coderbyte
                     break;
                 case '-':
                     output = op1 - op2;
-                    break;
-                case '^':
-                    output = Math.Pow(op1, op2);
                     break;
             }
             return output;
