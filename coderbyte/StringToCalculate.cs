@@ -11,26 +11,26 @@ namespace coderbyte
     {
 
         //Allowed Operator *,/,+,-,**
-        private static string[] operators = { "*", "/", "+", "-"};
+        private static char[] operators = { '*', '/', '+', '-','^'};
 
-        public static double smallExecuteOperation(string op, double op1, double op2)
+        public static double smallExecuteOperation(char op, double op1, double op2)
         {
             double output = 0;
             switch (op)
             {
-                case "*":
+                case '*':
                     output = op1 * op2;
                     break;
-                case "/":
+                case '/':
                     output = op1 / op2;
                     break;
-                case "+":
+                case '+':
                     output = op1 + op2;
                     break;
-                case "-":
-                    output = op1 + op2;
+                case '-':
+                    output = op1 - op2;
                     break;
-                case "**":
+                case '^':
                     output = Math.Pow(op1, op2);
                     break;
             }
@@ -53,9 +53,9 @@ namespace coderbyte
             {
                 //main process
                 int mainIdx = 0;
-                while (mainIdx < 4)
+                while (mainIdx < operators.Length)
                 {
-                    string mainop = operators[mainIdx];
+                    char mainop = operators[mainIdx];
                     int mainpos = _output.IndexOf(mainop, 0);
                     if (mainpos == -1)
                     {
@@ -65,9 +65,9 @@ namespace coderbyte
 
                     //find left number
                     int leftIdx = 0;
-                    while (leftIdx < 4)
+                    while (leftIdx < operators.Length)
                     {
-                        string leftop = operators[leftIdx];
+                        char leftop = operators[leftIdx];
                         leftpos = _output.LastIndexOf(leftop, mainpos - 1);
                         if (leftpos == -1)
                         {
@@ -93,9 +93,9 @@ namespace coderbyte
 
                     //find left number
                     int rightIdx = 0;
-                    while (rightIdx < 4)
+                    while (rightIdx < operators.Length)
                     {
-                        string rightop = operators[rightIdx];
+                        char rightop = operators[rightIdx];
                         int amo = 2;
                         if(mainpos + 1 == _output.Length-1)
                         {
@@ -148,7 +148,8 @@ namespace coderbyte
             if (op == null)
                 throw new ArgumentNullException();
 
-            var _output = op.Replace(" ", "");
+            var _output = op.Replace("**", "^");
+            _output = _output.Replace(" ", "");
             int output = 0;
             string betweenBracket = _output;
             while (true)
